@@ -1,43 +1,91 @@
-import React, { Component } from 'react';
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-} from 'react-router-dom';
+import * as React from 'react';
 
-import Home from '../Home';
-import PrivateRoute from '../Navigation/PrivateRoute.js';
+const App = () => {
 
+  const textbooks = [
+    {
+      title: 'The Road to React',
+      url: 'https://www.roadtoreact.com/',
+      author: 'Wieruch, R.',
+      year: "2021",
+    }, {
+      title: 'Learning Node.js',
+      url: 'https://github.com/marcwan/LearningNodeJS',
+      author: 'Wandschneider, Marc',
+      year: "2017",
+    },
+  ];
 
+  const [searchTerm, setSearchTerm] = React.useState('');
 
-class App extends Component {
-  constructor(props) {
-    super(props);
+  const handleSearch = (event) => {
+    setSearchTerm(event.target.value);
+  };
 
-    this.state = {
-      //
-    };
-  }
-
-  componentDidMount() {
-    //
-  }
-
-
-  componentWillUnmount() {
-    this.listener();
-  }
+  const searchedTextbooks = textbooks.filter(function (book) {
+    return book.title.includes(searchTerm);
+  });
 
 
-  render() {
-    return (
-	  <Router>
-	    <div>
-        <PrivateRoute exact path="/" component={Home}/>
-	    </div>
-	  </Router>
-    );
-  }
+
+  return (
+    <div>
+      <h1>
+        React Lecture 3_2
+      </h1>
+
+      <Search onSearch={handleSearch} />
+
+      <p>
+        Searching for <strong>{searchTerm}</strong>.
+      </p>
+
+      <hr />
+
+      <List list={searchedTextbooks} />
+
+    </div>
+  );
 }
+
+const Search = (props) => (
+  <div>
+    <label htmlFor="search">Search: </label>
+    <input
+      id="search"
+      type="text"
+      onChange={props.onSearch}
+    />
+
+  </div>
+);
+
+
+
+const List = (props) => {
+  return (
+    <ul>
+      {props.list.map((item) => {
+        return (
+          <Item item={item} />
+        );
+      })}
+    </ul>
+
+  )
+}
+
+const Item = (props) => {
+  return (
+    <li>
+      <span>
+        <a href={props.item.url}>{props.item.url}</a>
+      </span>
+      <span> {props.item.title}</span>
+      <span>{" by " + props.item.author}</span>
+    </li>
+  )
+}
+
 
 export default App;
