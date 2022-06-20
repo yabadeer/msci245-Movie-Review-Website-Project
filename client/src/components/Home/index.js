@@ -69,7 +69,7 @@ const Review = () => {
         <p> {successMessage} </p>
       ) : null}
 
-      {errorMessage ? <p severity="error">{errorMessage}</p> : null}
+      {errorMessage ? <p>{errorMessage}</p> : null}
 
       {showUserData ? (
         <>
@@ -258,13 +258,6 @@ class Home extends Component {
     this.state = {
       userID: 1,
       mode: 0,
-      selectedMovie: "",
-      enteredTitle: "",
-      enteredReview: "",
-      selectedRating: "",
-      showUserData: false,
-      successMessage: null,
-      errorMessage: null
     }
   };
 
@@ -324,18 +317,6 @@ class Home extends Component {
             <React.Fragment>Review a Movie!</React.Fragment>
           </Typography>
         </Grid>
-
-        {this.state.successMessage ? (
-          <React.Fragment>
-            {}
-          </React.Fragment>
-        ) : ( 
-          <Grid item>
-            <FormControl className={classes.formControl}>
-            </FormControl>
-          </Grid>
-        )}
-
         <Review />
       </Grid>
     );
