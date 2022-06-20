@@ -6,12 +6,9 @@ import { MuiThemeProvider, createTheme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-//import { makeStyles } from '@material-ui/core/styles';
 import InputLabel from '@material-ui/core/InputLabel';
-//import FormHelperText from '@material-ui/core/FormHelperText';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
-//import NativeSelect from '@material-ui/core/NativeSelect';
 import {
   MenuItem,
   TextField,
@@ -104,7 +101,7 @@ const Review = () => {
       />
 
       <Button variant="contained" color="secondary" onClick={onSubmit}>
-        Submit Review
+        Submit Review!
       </Button>
     </>
   );
