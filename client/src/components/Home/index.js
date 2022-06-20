@@ -12,7 +12,6 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 //import NativeSelect from '@material-ui/core/NativeSelect';
-import Alert from "@material-ui/lab/Alert";
 import {
   MenuItem,
   TextField,
@@ -70,10 +69,10 @@ const Review = () => {
   return (
     <>
       {successMessage ? (
-        <Alert severity="success">{successMessage}</Alert>
+        <p> {successMessage} </p>
       ) : null}
 
-      {errorMessage ? <Alert severity="error">{errorMessage}</Alert> : null}
+      {errorMessage ? <p severity="error">{errorMessage}</p> : null}
 
       {showUserData ? (
         <>
