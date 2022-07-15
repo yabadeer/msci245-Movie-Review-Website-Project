@@ -94,9 +94,9 @@ const Review = () => {
   React.useEffect(() => {
     callApiGetMovies()
       .then(res => {
-      var parsed = JSON.parse(res.express);
-      setMovieTitles(parsed);
-    });
+        var parsed = JSON.parse(res.express);
+        setMovieTitles(parsed);
+      });
   }, [])
 
 
@@ -165,7 +165,7 @@ const Review = () => {
 
 
 const MovieSelection = (props) => {
-  const {movieTitles, selectedMovie, setSelectedMovie} = props;
+  const { movieTitles, selectedMovie, setSelectedMovie } = props;
 
   return (
     <FormControl>
@@ -191,7 +191,7 @@ const MovieSelection = (props) => {
 }
 
 const ReviewTitle = (props) => {
-  const {enteredTitle, setEnteredTitle} = props;
+  const { enteredTitle, setEnteredTitle } = props;
 
   return (
     <FormControl>
@@ -208,7 +208,7 @@ const ReviewTitle = (props) => {
 }
 
 const ReviewBody = (props) => {
-  const {enteredReview, setEnteredReview} = props;
+  const { enteredReview, setEnteredReview } = props;
 
   return (
     <FormControl>
@@ -227,7 +227,7 @@ const ReviewBody = (props) => {
 }
 
 const ReviewRating = (props) => {
-  const {selectedRating, setSelectedRating} = props;
+  const { selectedRating, setSelectedRating } = props;
   const ratings = ["1", "2", "3", "4", "5"];
 
   return (
@@ -303,7 +303,7 @@ const styles = theme => ({
     maxWidth: 200,
     paddingBottom: theme.spacing(4),
   }
-  
+
 });
 
 

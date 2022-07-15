@@ -31,11 +31,19 @@ class App extends Component {
 
   render() {
     return (
+<<<<<<< HEAD
       <Router>
         <div>
           <PrivateRoute exact path="/" component={Home} />
         </div>
       </Router>
+=======
+	  <Router>
+	    <div>
+        <PrivateRoute exact path="/" component={Home}/>
+	    </div>
+	  </Router>
+>>>>>>> e067bf0c72ce07d9d037f53882f8d9ce8a91de13
     );
   }
 }
