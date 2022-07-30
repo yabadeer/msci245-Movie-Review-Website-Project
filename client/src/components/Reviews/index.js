@@ -17,14 +17,16 @@ import {
   Button,
   FormControlLabel,
   FormLabel,
+  Container,
 } from "@material-ui/core";
+import { MyAppBar } from "../Landing";
 
 //Dev mode
-//const serverURL = ""; //enable for dev mode
+// const serverURL = "http://localhost:5001"; //enable for dev mode
 
 //Deployment mode instructions
 const serverURL =
-  "http://ec2-18-216-101-119.us-east-2.compute.amazonaws.com:3025"; //enable for deployed mode; Change PORT to the port number given to you;
+  "http://ec2-18-216-101-119.us-east-2.compute.amazonaws.com:3025";
 //To find your port number:
 //ssh to ov-research-4.uwaterloo.ca and run the following command:
 //env | grep "PORT"
@@ -55,7 +57,6 @@ const Review = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        //authorization: `Bearer ${this.state.token}`
       },
     });
     const body = await response.json();
@@ -71,7 +72,6 @@ const Review = () => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        //authorization: `Bearer ${this.state.token}`
       },
       body: JSON.stringify({
         movieId: selectedMovie.id,
@@ -125,37 +125,45 @@ const Review = () => {
         </>
       ) : null}
 
-      <MovieSelection
-        movieTitles={movieTitles}
-        selectedMovie={selectedMovie}
-        setSelectedMovie={setSelectedMovie}
-      />
-      <ReviewTitle
-        enteredTitle={enteredTitle}
-        setEnteredTitle={setEnteredTitle}
-      />
-      <ReviewBody
-        enteredReview={enteredReview}
-        setEnteredReview={setEnteredReview}
-      />
+      <Grid>
+        <MovieSelection
+          movieTitles={movieTitles}
+          selectedMovie={selectedMovie}
+          setSelectedMovie={setSelectedMovie}
+        />
+      </Grid>
 
-      <ReviewRating
-        selectedRating={selectedRating}
-        setSelectedRating={setSelectedRating}
-      />
+      <Grid>
+        <ReviewTitle
+          enteredTitle={enteredTitle}
+          setEnteredTitle={setEnteredTitle}
+        />
+      </Grid>
+      <Grid>
+        <ReviewBody
+          enteredReview={enteredReview}
+          setEnteredReview={setEnteredReview}
+        />
+      </Grid>
+      <Grid>
+        <ReviewRating
+          selectedRating={selectedRating}
+          setSelectedRating={setSelectedRating}
+        />
+      </Grid>
 
-      <Button variant="contained" color="secondary" onClick={onSubmit}>
+      <Button variant="contained" color="primary" onClick={onSubmit}>
         Submit Review!
       </Button>
     </>
   );
 };
 
-const MovieSelection = (props) => {
+export const MovieSelection = (props) => {
   const { movieTitles, selectedMovie, setSelectedMovie } = props;
 
   return (
-    <FormControl>
+    <FormControl style={{ marginTop: 30, width: "100%" }}>
       <InputLabel id="select-movie-title">Select a Movie</InputLabel>
       <Select
         labelId="select-movie-title"
@@ -181,7 +189,7 @@ const ReviewTitle = (props) => {
   const { enteredTitle, setEnteredTitle } = props;
 
   return (
-    <FormControl>
+    <FormControl style={{ marginTop: 30, width: "100%" }}>
       <TextField
         id="standard-basic"
         label="Review Title"
@@ -198,7 +206,7 @@ const ReviewBody = (props) => {
   const { enteredReview, setEnteredReview } = props;
 
   return (
-    <FormControl>
+    <FormControl style={{ marginTop: 30, width: "100%" }}>
       <TextField
         id="standard-multiline-flexible"
         label="Multiline Review"
@@ -218,7 +226,7 @@ const ReviewRating = (props) => {
   const ratings = ["1", "2", "3", "4", "5"];
 
   return (
-    <FormControl>
+    <FormControl style={{ marginTop: 30 }}>
       <FormLabel id="select-a-rating">Select a Rating</FormLabel>
       <RadioGroup
         row
@@ -292,7 +300,7 @@ const styles = (theme) => ({
   },
 });
 
-class Home extends Component {
+class Reviews extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -337,41 +345,36 @@ class Home extends Component {
     const { classes } = this.props;
 
     const mainMessage = (
-      <Grid
-        container
-        spacing={1}
-        style={{ maxWidth: "25%", minHeight: "100vh" }}
-        direction="column"
-        justify="flex-start"
-        alignItems="stretch"
-        className={classes.mainMessageContainer}
-      >
-        <Grid item>
-          <Typography
-            variant={"h3"}
-            className={classes.mainMessage}
-            align="left"
+      <>
+        <MyAppBar />
+        <Container>
+          <Grid
+            container
+            spacing={5}
+            direction="column"
+            justify="flex-start"
+            alignItems="stretch"
           >
-            <React.Fragment>Review a Movie!</React.Fragment>
-          </Typography>
-        </Grid>
-        <Review />
-      </Grid>
+            <Typography
+              style={{ textAlign: "center", marginTop: 50 }}
+              variant="h5"
+            >
+              Review a Movie!
+            </Typography>
+          </Grid>
+          <Grid item spacing={5}>
+            <Review />
+          </Grid>
+        </Container>
+      </>
     );
 
-    return (
-      <MuiThemeProvider theme={theme}>
-        <div className={classes.root}>
-          <CssBaseline />
-          <Paper className={classes.paper}>{mainMessage}</Paper>
-        </div>
-      </MuiThemeProvider>
-    );
+    return <div className={classes.root}>{mainMessage}</div>;
   }
 }
 
-Home.propTypes = {
+Reviews.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(Home);
+export default withStyles(styles)(Reviews);
